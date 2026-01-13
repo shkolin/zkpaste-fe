@@ -1,6 +1,9 @@
 "use client";
 
-import { use, useState, useEffect } from "react";
+import { use, useEffect } from "react";
+
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -122,11 +125,7 @@ const PasteView = ({ params }: { params: Promise<{ paste_id: string }> }) => {
   return (
     <>
       <div className="space-y-4 p-4 min-h-full grow max-w-6xl">
-        <Card>
-          <CardContent className="min-h-170 whitespace-pre-wrap">
-            {plainText}
-          </CardContent>
-        </Card>
+        <SyntaxHighlighter style={a11yDark}>{plainText}</SyntaxHighlighter>
         <div className="flex justify-start">
           <Button className="w-full md:w-30" onClick={toggleDelete}>
             Delete
