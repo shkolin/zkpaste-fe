@@ -2,21 +2,19 @@
 
 import { use, useEffect } from "react";
 
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-import { Card, CardContent } from "@/components/ui/card";
-
-import { Button } from "@/components/ui/button";
+import { ArmorValue, DearmorValue } from "@/app/service/armor";
 import { DecryptPaste, ProofOfKnowlege } from "@/app/service/paste";
-import { DearmorValue, ArmorValue } from "@/app/service/armor";
+import { Button } from "@/components/ui/button";
 
 import { DeleteModal } from "@/components/DeleteModal";
 
+import { EnterPasswordDialog } from "@/components/view_paste/EnterPasswordDialog";
+import { PasteNotFound } from "@/components/view_paste/PasteNotFound";
 import { getPasteHandler } from "@/handlers/paste/get";
 import { updateViewCountHandler } from "@/handlers/paste/udpate_view";
-import { PasteNotFound } from "@/components/view_paste/PasteNotFound";
-import { EnterPasswordDialog } from "@/components/view_paste/EnterPasswordDialog";
 import {
   PasteDecryptionState,
   PasteLoadState,
@@ -122,11 +120,23 @@ const PasteView = ({ params }: { params: Promise<{ paste_id: string }> }) => {
   ) {
     return <h1>Decoding...</h1>;
   }
+
   return (
     <>
       <div className="space-y-4 p-4 min-h-full grow max-w-6xl">
-        <SyntaxHighlighter style={a11yDark}>{plainText}</SyntaxHighlighter>
-        <div className="flex justify-start">
+        <SyntaxHighlighter
+          style={materialDark}
+          language="python"
+          showLineNumbers
+          customStyle={{
+            margin: 0,
+            borderRadius: "0.5rem",
+            fontSize: 14,
+          }}
+        >
+          {plainText ?? ""}
+        </SyntaxHighlighter>
+        <div className="flex justify-start mt-6">
           <Button className="w-full md:w-30" onClick={toggleDelete}>
             Delete
           </Button>
