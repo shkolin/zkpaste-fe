@@ -3,7 +3,7 @@
 import { use, useEffect } from "react";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { ArmorValue, DearmorValue } from "@/app/service/armor";
 import { DecryptPaste, ProofOfKnowlege } from "@/app/service/paste";
@@ -125,16 +125,15 @@ const PasteView = ({ params }: { params: Promise<{ paste_id: string }> }) => {
     <>
       <div className="space-y-4 p-4 min-h-full grow max-w-6xl">
         <SyntaxHighlighter
-          style={materialDark}
-          language="python"
-          showLineNumbers
+          style={vscDarkPlus}
+          // language="python"
+          // showLineNumbers
           customStyle={{
             margin: 0,
             borderRadius: "0.5rem",
-            fontSize: 14,
           }}
         >
-          {plainText ?? ""}
+          {plainText!!}
         </SyntaxHighlighter>
         <div className="flex justify-start mt-6">
           <Button className="w-full md:w-30" onClick={toggleDelete}>
