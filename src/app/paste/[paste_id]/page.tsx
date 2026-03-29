@@ -63,6 +63,7 @@ const PasteView = ({ params }: { params: Promise<{ paste_id: string }> }) => {
         iv: data.iv,
         paste: data.paste,
         passwordProtected: data.password_protected,
+        syntax: data.syntax,
       });
       if (data.password_protected) {
         decryptPasswordRequired();
@@ -126,7 +127,7 @@ const PasteView = ({ params }: { params: Promise<{ paste_id: string }> }) => {
       <div className="space-y-4 p-4 min-h-full grow max-w-6xl">
         <SyntaxHighlighter
           style={vscDarkPlus}
-          // language="python"
+          language={pasteData!.syntax}
           // showLineNumbers
           customStyle={{
             margin: 0,
